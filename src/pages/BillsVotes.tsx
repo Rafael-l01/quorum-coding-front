@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
+import api from "../API/axios";
 
 function BillsVotes() {
-  const [rowData, setRowData] = useState<any>([
-    {
-      vote1: 13,
-      vote2: 6,
-      bill_id: "2900994",
-      bill_title: "H.R. 3684: Infrastructure Investment and Jobs Act",
-      sponsor_name: "No Primary Sponsor",
-    },
-    {
-      vote1: 6,
-      vote2: 13,
-      bill_id: "2952375",
-      bill_title: "H.R. 5376: Build Back Better Act",
-      sponsor_name: "Rep. John Yarmuth (D-KY-3)",
-    },
-  ]);
+  const [rowData, setRowData] = useState<any>(null);
+  const getData = () => {
+    api
+      .get("/bill/legislators-votes")
+      .then((response) => setRowData(response.data))
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState<any>([
