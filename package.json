@@ -11,6 +11,7 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "ag-grid-react": "^31.1.1",
+    "axios": "^1.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0",
