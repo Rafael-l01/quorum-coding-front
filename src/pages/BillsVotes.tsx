@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
+import { Link } from "react-router-dom";
 
 function BillsVotes() {
   const [rowData, setRowData] = useState<any>([
@@ -31,8 +33,29 @@ function BillsVotes() {
   ]);
 
   return (
-    <div className="ag-theme-quartz" style={{ height: 500 }}>
-      <AgGridReact rowData={rowData} columnDefs={colDefs} />
+    <div>
+      <Sidebar>
+        <Menu
+          menuItemStyles={{
+            button: {
+              [`&.active`]: {
+                backgroundColor: "#13395e",
+                color: "#b6c8d9",
+              },
+            },
+          }}
+        >
+          <MenuItem component={<Link to="/legislators-votes" />}>
+            Legislators Votes
+          </MenuItem>
+          <MenuItem component={<Link to="/bills-votes" />}>
+            Bills Votes
+          </MenuItem>
+        </Menu>
+      </Sidebar>
+      <div className="ag-theme-quartz" style={{ height: 500 }}>
+        <AgGridReact rowData={rowData} columnDefs={colDefs} />
+      </div>
     </div>
   );
 }
